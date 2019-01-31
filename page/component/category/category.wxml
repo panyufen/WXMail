@@ -1,0 +1,24 @@
+<view class="main">
+  <view class="categroy-left">
+    <view wx:for="{{category}}" wx:key="index" data-id="i{{item.id}}" data-index="{{index}}" bindtap="switchTab" class="cate-list {{curIndex === index?'on':''}}">{{item.name}}</view>
+  </view>
+
+  <scroll-view class="categroy-right" scroll-y="{{isScroll}}" scroll-into-view="{{toView}}" scroll-with-animation="true">
+    <block wx:for="{{goodsList}}" wx:key="unique">
+      <view class="product-list" id="{{item.id}}">
+        <navigator url="../details/details?id={{item.id}}">
+          <image src="{{item.pic}}"></image>
+          <View class="goods-text-container">
+            <view class="goodsname">
+              {{item.name}} {{item.weight}}Kg
+            </view>
+            <view class="goodsprice">
+              {{item.price}}元
+            </view>
+          </View>
+        </navigator>
+      </view>
+    </block>
+  </scroll-view>
+
+</view>
