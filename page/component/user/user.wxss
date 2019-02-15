@@ -10,6 +10,10 @@
     font-size: 28rpx;
     color: #fff;
 }
+.header .getUserInfoBtn{
+	font-size: 25rpx;
+	display:table-cell;
+}
 .header .thumb{
     position: absolute;
     left: 30rpx;

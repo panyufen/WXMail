@@ -1,0 +1,8 @@
+<view class="address-list" wx:for="{{addressList}}" wx:key="index">
+    <view class="address-detail">
+        <image src="{{item.thumb}}"></image>
+        <view class="">姓名：{{item.name}}</view>
+        <view class="">电话：{{item.tel}}</view>
+        <text class="address-detail">详细地址{{item.detail}}</text>
+    </view>
+</view>

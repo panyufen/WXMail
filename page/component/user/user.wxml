@@ -2,11 +2,14 @@
     <view class="header">
         <image src="{{thumb}}" class="thumb"></image>
         <text class="nickname">{{nickname}}</text>
-        <text class="about">关于我们</text>
+        <text class="about" style='display:none'>关于我们</text>
+        <button class="getUserInfoBtn" open-type="getUserInfo" lang="zh_CN" bindgetuserinfo="onGotUserInfo" wx:if="{{isShowReqUserInfo}}">
+            微信登陆
+        </button>
     </view>
     <view class="address-box">
         <view class="address-manage">
-            <navigator url="/page/component/address/address">地址管理</navigator>
+            <navigator url="/page/component/addresslist/addresslist">地址管理</navigator>
         </view>
         <view wx:if="{{hasAddress}}" class="address-list">
             <view>{{address.name}}</view>
