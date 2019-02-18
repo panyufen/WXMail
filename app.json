@@ -9,8 +9,6 @@
 		"page/component/details/details",
 		"page/component/list/list",
 		"page/component/search/search",
-		"page/component/addr",
-		"page/component/addresslist",
 		"page/component/addresslist/addresslist"
 	],
 	"window": {

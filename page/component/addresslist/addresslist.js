@@ -1,18 +1,52 @@
-// page/component/addresslist/addresslist.js
-let app = getApp();
+const app = getApp()
 Page({
-
-	/**
-	 * 页面的初始数据
-	 */
 	data: {
-		addressList:[]
+		addressList: []
 	},
 
-	/**
-	 * 生命周期函数--监听页面加载
-	 */
-	onLoad: function (options) {
+	selectTap: function (e) {
+		var id = e.currentTarget.dataset.id;
+		wx.request({
+			url: app.api.editAddress,
+			method: "post",
+			data: {
+				token: wx.getStorageSync('token'),
+				id:id,
+				isDefault:"true"
+
+			},
+			header: {
+				'content-type': 'application/x-www-form-urlencoded'
+			},
+			success: function (resp) {
+				wx.navigateBack({});
+			}
+		});
+	},
+
+	addAddess: function () {
+		wx.navigateTo({
+			url: "/page/component/address/address"
+		})
+	},
+
+	editAddess: function (e) {
+		wx.navigateTo({
+			url: "/page/component/address/address?id=" + e.currentTarget.dataset.id
+		})
+	},
+
+	onLoad: function () {
+		console.log('onLoad')
+
+
+	},
+	onShow: function () {
+		this.initShippingAddress();
+	},
+	initShippingAddress: function () {
+		var self = this;
+		// 发起网络请求
 		wx.request({
 			url: app.api.getAddressList,
 			method: "get",
@@ -22,59 +56,20 @@ Page({
 			header: {
 				'content-type': 'application/x-www-form-urlencoded'
 			},
-			success: function (resp) {
-				console.log("获取收货地址列表");
-				console.log(resp);
+			success: function (res) {
+				console.log("addressList reuslt");
+				console.log(res);
+				if (res.data.code == 0) {
+					self.setData({
+						addressList: res.data.data
+					});
+				} else if (res.data.code == 700) {
+					self.setData({
+						addressList: null
+					});
+				}
 			}
 		});
-	},
-
-	/**
-	 * 生命周期函数--监听页面初次渲染完成
-	 */
-	onReady: function () {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面显示
-	 */
-	onShow: function () {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面隐藏
-	 */
-	onHide: function () {
-
-	},
-
-	/**
-	 * 生命周期函数--监听页面卸载
-	 */
-	onUnload: function () {
-
-	},
-
-	/**
-	 * 页面相关事件处理函数--监听用户下拉动作
-	 */
-	onPullDownRefresh: function () {
-
-	},
-
-	/**
-	 * 页面上拉触底事件的处理函数
-	 */
-	onReachBottom: function () {
-
-	},
-
-	/**
-	 * 用户点击右上角分享
-	 */
-	onShareAppMessage: function () {
-
 	}
+
 })
